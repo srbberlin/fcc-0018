@@ -1,0 +1,54 @@
+html, body {
+  background-color: lightgray;
+  margin: 0;
+  padding: 0;
+}
+
+svg {
+  margin: auto;
+}
+
+#header {
+  transform: translate(193px, 20px);
+  text-anchor: middle;
+}
+
+.c1 {
+  font-size: 12px;
+}
+
+.c2 {
+  transform: translate(0px, 10px);
+  font-size: 8px;
+}
+
+#canvas {
+  transform: translate(83px, 40px);
+}
+
+#box {
+  font-size: 4px;
+}
+
+#b {
+  fill: red;
+  stroke: blue;
+}
+
+#d, #v {
+  fill: #ffffff
+}
+
+#d {transform: translate(3px,9px);}
+#v {transform: translate(3px,17px);}
+
+.c9, .c10 {
+  font-size: 4px;
+}
+
+.c10 {transform: translate(0px,8px);}
+
+#footer {
+  transform: translate(190px, 180px);
+  text-anchor: middle;
+}
