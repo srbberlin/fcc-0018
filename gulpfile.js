@@ -1,15 +1,14 @@
 const gulp = require('gulp')
+const runSeq = require('run-sequence')
 const sass = require('gulp-sass')
 const sourcemaps = require('gulp-sourcemaps')
-//const babel = require('gulp-babel')
 const browserify = require('browserify')
 const babelify = require('babelify')
-const browserSync = require('browser-sync')
+const browserSync = require('browser-sync').create()
 const source = require('vinyl-source-stream')
 const del = require('del')
 
 var config = {
-  base:    __dirname + '/',
   src:     __dirname + '/src',
   htmlin:  __dirname + '/src/html/**/*.html',
   cssin:   __dirname + '/src/css/**/*.css',
@@ -26,16 +25,15 @@ gulp.task('reload', function () {
   browserSync.reload()
 })
 
-gulp.task('serve', ['sass', 'scripts', 'html'], function () {
-  browserSync({
+gulp.task('serve', ['sass', 'scripts', 'images', 'html'], function () {
+  browserSync.init({
     server: config.htmlout
   })
 
-  gulp.watch(config.html, ['reload'])
-  gulp.watch(config.jsin, ['scripts', 'reload'])
-  gulp.watch(config.cssin, ['sass', 'reload'])
-  gulp.watch(config.imgin, ['images', 'reload'])
-  gulp.watch(config.htmlin, ['html', 'reload'])
+  gulp.watch(config.jsin, () => runSeq(['scripts', 'reload']))
+  gulp.watch(config.cssin, () => runSeq(['sass', 'reload']))
+  gulp.watch(config.imgin, () => runSeq(['images', 'reload']))
+  gulp.watch(config.htmlin, () => runSeq(['html', 'reload']))
 })
 
 gulp.task('sass', function () {
@@ -48,7 +46,10 @@ gulp.task('sass', function () {
 })
 
 gulp.task('scripts', function () {
-  return browserify({entries: config.jsentry, extensions: ['.js', '.jsx'], debug: true})
+  return browserify({
+    entries: config.jsentry,
+    extensions: ['.js'],
+    debug: true})
     .transform(babelify)
     .bundle()
     .pipe(source('index.js'))
@@ -82,6 +83,7 @@ gulp.task('clean', function () {
   return res
 })
 
-gulp.task('build', ['scripts', 'sass', 'html'])
+gulp.task('build', ['scripts', 'sass', 'html', 'images'])
 
 gulp.task('default', ['serve'])
+
