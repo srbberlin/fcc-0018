@@ -20,8 +20,9 @@ var config = {
   htmlout: __dirname + '/docs/'
 }
 
-function reload () {
+function reload (cb) {
   browserSync.reload()
+  cb()
 }
 
 function serve () {
