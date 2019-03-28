@@ -1,4 +1,8 @@
 module.exports = (data) => {
+  let svg = d3.select('svg').node()
+  let canvas = d3.select('#canvas')
+  let tooltip = d3.select('#tooltip')
+
   let fmt = d3.format('.3f')
 
   let scy = d3.scaleLinear()
@@ -13,40 +17,44 @@ module.exports = (data) => {
     .domain(data.varianceDomain())
 
   let mouseOver = () => {
-    box.attr('display', null)
+    tooltip.attr('display', null)
   }
   
   let mouseMove = (d) => {
-    let x = Math.round(d3.event.layerX) + 90
-    let y = Math.round(d3.event.layerY) + 10
+    let point = svg.createSVGPoint()
+    point.x = d3.event.clientX
+    point.y = d3.event.clientY
+    point = point.matrixTransform(svg.getScreenCTM().inverse())
 
-    box
-      .attr('transform', 'translate(' + x + ',' + y + ')')
+    tooltip
+      .attr('transform', 'translate(' + (point.x + 5) + ',' + (point.y + 5) + ')')
+      .attr('data-year', d.year)
     
-    box
+    tooltip
       .select('#d')
-      .text(d.year + ', ' + data.monthData()[d.month - 1][0])
+      .text(d.year + ', ' + data.monthData()[d.month - 1])
 
-    box
+    tooltip
       .select('#v')
       .text(fmt(d.variance + data.baseTemperature()) + ' (' + fmt(d.variance) + ') °C')
   }
     
   let mouseOut = () => {
-    box.attr('display', 'none')
+    tooltip.attr('display', 'none')
   }
     
-  d3.select('#canvas')
+  canvas
     .selectAll('g')
     .data(data.yearData())
     .enter()
     .selectAll('rect')
-    .data( (d) => { return d } )
+    .data((d) => { return d } )
     .enter()
     .append('rect')
     .on('mouseover', mouseOver)
     .on('mousemove', mouseMove)
     .on('mouseout', mouseOut)
+    .attr('class', 'cell')
     .attr('x', d => { return scy(d.year) })
     .attr('y', d => { return scm(d.month) })
     .attr('width', 2)
@@ -54,21 +62,24 @@ module.exports = (data) => {
     .attr('style', (d) => {
       return 'fill: ' + scc(d.variance)
     })
+    .attr('data-year', d => { return d.year })
+    .attr('data-month', d => { return d.month - 1 })
+    .attr('data-temp', d => { return d.temp })
 
-  let box = d3.select('#box')
+  tooltip
     .attr('display', 'none')
 
-  box
+  tooltip
     .append('rect')
     .attr('id', 'b')
     .attr('width', 42)
     .attr('height', 23)  
 
-  box
+  tooltip
     .append('text')
     .attr('id', 'd')
   
-  box
+  tooltip
     .append('text')
     .attr('id', 'v')
 }

@@ -1,20 +1,11 @@
 module.exports = (data) => {
-  let sc = d3.scaleLinear()
-    .domain(data.monthDomain())
-    .range([0, 100])
-  
-  let root = d3.select('#leftAxis')
-    .attr('transform', 'translate(0, 40)')
-    .attr('style', 'font-family: sans-serif; font-size: 5px')
-    .selectAll('g')
-    .data(data.monthData())
-    .enter()
-    .append('g')
+  let sc = d3.scaleOrdinal()
+    .domain(data.monthData())
+    .range([0, 9.1, 17.2, 26.3, 35.4, 44.5, 53.6, 62.7, 71.8, 80.9, 90, 100])
 
-  root
-    .append('text')
-    .attr('text-anchor', 'end')
-    .text(d => { return d[0] })
-    .attr('y', d => { return sc(d[1]) + 6 })
-    .attr('x', 78)
+  let ax = d3.axisLeft(sc)
+
+  d3.select('#y-axis')
+    .attr('transform', 'translate(76, 45)')
+    .call(ax)
 }

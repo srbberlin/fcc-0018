@@ -4,51 +4,59 @@ html, body {
   padding: 0;
 }
 
-svg {
-  margin: auto;
-}
-
 #header {
   transform: translate(193px, 20px);
   text-anchor: middle;
 }
 
-.c1 {
-  font-size: 12px;
+#x-axis, #y-axis {
+  font-family: sans-serif;
+  font-size: 5px;
 }
+
+#canvas { transform: translate(83px, 40px); }
+
+#tooltip {
+  font-size: 5px;
+  font-weight: bold;
+}
+
+#legend {
+  transform: translate(193px, 180px);
+  text-anchor: middle;
+}
+
+.txt {
+  width: 250px;
+  height: 30px;
+}
+
+#b {
+  fill: red;
+  stroke: blue;
+  font-weight: bold;
+}
+
+#d, #v { fill: #ffffff }
+
+#d {transform: translate(3px,9px);}
+
+#v {transform: translate(3px,17px);}
+
+.c1 { font-size: 12px; }
 
 .c2 {
   transform: translate(0px, 10px);
   font-size: 8px;
 }
 
-#canvas {
-  transform: translate(83px, 40px);
+.c3 {
+  font-size: 8px;
+  text-anchor: start;
 }
 
-#box {
-  font-size: 4px;
-}
+.c9, .c10 { font-size: 6px; }
 
-#b {
-  fill: red;
-  stroke: blue;
-}
+.c9 { transform: translate(0px,24px); }
 
-#d, #v {
-  fill: #ffffff
-}
-
-#d {transform: translate(3px,9px);}
-#v {transform: translate(3px,17px);}
-
-.c9, .c10 {
-  font-size: 4px;
-}
-
-.c10 {transform: translate(0px,8px);}
-
-#footer {
-  transform: translate(190px, 180px);
-  text-anchor: middle;
-}
+.c10 { transform: translate(0px,31px); }

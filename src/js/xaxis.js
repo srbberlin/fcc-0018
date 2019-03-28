@@ -6,8 +6,7 @@ module.exports = (data) => {
   let ax = d3.axisBottom(sc)
     .tickFormat(d3.format('d'))
 
-  d3.select('#bottomAxis')
+  d3.select('#x-axis')
     .attr('transform', 'translate(83, 155)')
-    .attr('style', 'font-family: sans-serif; font-size: 5px')
     .call(ax)
 }
