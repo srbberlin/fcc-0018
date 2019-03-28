@@ -5,22 +5,21 @@
     <link rel="stylesheet" href="css/index.css">
   </head>
   <body>
-    <svg viewbox="0 0 400 200">
+    <svg viewbox="0 0 400 250">
       <g id="header">
-        <text class="c1">Heatmap</text>
-        <text class="c2">Monthly Global Surface Temperature</text>
+        <text id="title" class="c1">Heatmap</text>
+        <text id="description" class="c2">Monthly Global Surface Temperature</text>
       </g>
-      <g id="leftAxis"></g>
+      <g id="y-axis"></g>
       <g id="canvas"></g>
-      <g id="box"></g>
-      <g id="bottomAxis"></g>
-      <g id="footer">
-          <text class="c9">Temperatures are in Celsius. Anomalies relative to the Jan 1951-Dec 1980 average are in braces.</text>
-          <text class="c10">Estimated Jan 1951-Dec 1980 absolute temperature in ℃: 8.66 +/- 0.07</text>
+      <g id="tooltip"></g>
+      <g id="x-axis"></g>
+      <g id="legend">
       </g>
     </svg>
     <script src="https://d3js.org/d3.v4.js"></script>
     <script src="https://d3js.org/d3-scale-chromatic.v1.js"></script>
     <script src="js/index.js"></script>
+    <script src="https://cdn.freecodecamp.org/testable-projects-fcc/v1/bundle.js"></script>
   </body>
 </html>
