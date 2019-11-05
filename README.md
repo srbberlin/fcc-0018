@@ -1,6 +1,6 @@
 # fcc-0018
 
-FreeCodeCamp: 
+FreeCodeCamp: Heatmap
 
 Packages:
 
